@@ -1,0 +1,141 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model company {
+  id          Int     @id
+  name        String? @db.VarChar(64)
+  img         String? @db.VarChar(512)
+  grade       String? @db.VarChar(64)
+  lat         String? @db.VarChar(64)
+  lng         String? @db.VarChar(64)
+  phoneNumber String? @db.VarChar(64)
+  address     String? @db.VarChar(64)
+  // facility    facility?
+  // hours       hours?
+  // machine     machine?
+  // price       price?
+  // program     program?
+  // review      review?
+  // comment     comment[]
+}
+
+model facility {
+  company_id Int  @id
+  shower     Int? @db.TinyInt
+  locker     Int? @db.TinyInt
+  sweatsuit  Int? @db.TinyInt
+  // company    company @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_facility_company1")
+
+  // @@index([company_id], map: "fk_facility_company1_idx")
+}
+
+model hours {
+  company_id Int     @id
+  mon_open   String? @db.VarChar(64)
+  mon_close  String? @db.VarChar(64)
+  tue_open   String? @db.VarChar(64)
+  tue_close  String? @db.VarChar(64)
+  wed_open   String? @db.VarChar(64)
+  wed_close  String? @db.VarChar(64)
+  thu_open   String? @db.VarChar(64)
+  thu_close  String? @db.VarChar(64)
+  fri_open   String? @db.VarChar(64)
+  fri_close  String? @db.VarChar(64)
+  sat_open   String? @db.VarChar(64)
+  sat_close  String? @db.VarChar(64)
+  sun_open   String? @db.VarChar(64)
+  sun_close  String? @db.VarChar(64)
+  // company    company   @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_hours_company1")
+
+  // @@index([company_id], map: "fk_hours_company1_idx")
+}
+
+model machine {
+  company_id Int     @id
+  machine0   String? @db.VarChar(64)
+  machine1   String? @db.VarChar(64)
+  machine2   String? @db.VarChar(64)
+  machine3   String? @db.VarChar(64)
+  machine4   String? @db.VarChar(64)
+  machine5   String? @db.VarChar(64)
+  machine6   String? @db.VarChar(64)
+  machine7   String? @db.VarChar(64)
+  machine8   String? @db.VarChar(64)
+  machine9   String? @db.VarChar(64)
+  machine10  String? @db.VarChar(64)
+  machine11  String? @db.VarChar(64)
+  machine12  String? @db.VarChar(64)
+  machine13  String? @db.VarChar(64)
+  machine14  String? @db.VarChar(64)
+  machine15  String? @db.VarChar(64)
+  machine16  String? @db.VarChar(64)
+  machine17  String? @db.VarChar(64)
+  machine18  String? @db.VarChar(64)
+  machine19  String? @db.VarChar(64)
+  // company    company @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_machine_company")
+
+  // @@index([company_id], map: "fk_machine_company_idx")
+}
+
+model price {
+  company_id Int     @id
+  month1     String? @db.VarChar(64)
+  month3     String? @db.VarChar(64)
+  month6     String? @db.VarChar(64)
+  month12    String? @db.VarChar(64)
+  // company    company @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_price_company1")
+
+  // @@index([company_id], map: "fk_price_company1_idx")
+}
+
+model program {
+  company_id Int     @id
+  pt         Int?    @db.TinyInt
+  GX1        String? @db.VarChar(64)
+  GX2        String? @db.VarChar(64)
+  GX3        String? @db.VarChar(64)
+  // company    company @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_program_company1")
+
+  // @@index([company_id], map: "fk_program_company1_idx")
+}
+
+model review {
+  review0    String? @db.Text
+  review1    String? @db.Text
+  review2    String? @db.Text
+  review3    String? @db.Text
+  review4    String? @db.Text
+  review5    String? @db.Text
+  review6    String? @db.Text
+  review7    String? @db.Text
+  review8    String? @db.Text
+  review9    String? @db.Text
+  company_id Int     @id
+  // company    company @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_review_company1")
+
+  // @@index([company_id], map: "fk_review_company1_idx")
+}
+
+model comment {
+  company_id Int  @id
+  kind       Int? @db.Int // 친절해요
+  tidy       Int? @db.Int // 시설이 깔끔해요
+  various    Int? @db.Int // 기구가 다양해요
+  wide       Int? @db.Int // 공간이 넓어요
+  reasonable Int? @db.Int // 가격이 합리적이다
+  pose       Int? @db.Int // 자세를 꼼꼼히 봐주세요
+  advice     Int? @db.Int // 상담이 자세해요
+  parking    Int? @db.Int // 주차하기 편해요
+  class      Int? @db.Int // 수업이 체계적이에요
+  GX         Int? @db.Int // 프로그램이 다양해요
+  care       Int? @db.Int
+  // company    company @relation(fields: [company_id], references: [id], onDelete: Cascade, onUpdate: NoAction, map: "fk_comment_company1")
+
+  // @@index([company_id], map: "fk_comment_company1_idx")
+}
